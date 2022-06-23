@@ -1,4 +1,4 @@
-package me.mi0.copycatmacro.RotationFunctions
+package dev.bozho.states.RotationFunctions
 
 import kotlin.math.PI
 import kotlin.math.cos

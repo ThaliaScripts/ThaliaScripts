@@ -26,7 +26,6 @@ loom {
             property("mixin.debug.verbose", "true")
             property("mixin.debug.export", "true")
             property("mixin.dumpTargetOnFailure", "true")
-            arg("--tweakClass", "gg.essential.loader.stage0.EssentialSetupTweaker")
             arg("--mixin", "thaliascripts.mixins.json")
         }
     }
@@ -47,14 +46,6 @@ dependencies {
     minecraft("com.mojang:minecraft:1.8.9")
     mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
     forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
-
-    embed("gg.essential:loader-launchwrapper:1.1.3")
-    compileOnly("gg.essential:essential-1.8.9-forge:2581") {
-        exclude(module = "asm")
-        exclude(module = "asm-commons")
-        exclude(module = "asm-tree")
-        exclude(module = "gson")
-    }
 
     embed("com.github.LlamaLad7:MixinExtras:0.0.8")
     annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.8")
@@ -85,7 +76,6 @@ tasks.jar {
     manifest.attributes(mapOf(
         "ModSide" to "CLIENT",
         "Main-Class" to "dev.bozho.ThaliaScripts",
-        "TweakClass" to "gg.essential.loader.stage0.EssentialSetupTweaker",
         "TweakOrder" to "0",
         "MixinConfigs" to "thaliascripts.mixins.json"
     ))
