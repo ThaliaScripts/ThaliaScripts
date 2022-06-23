@@ -1,0 +1,11 @@
+{
+  "compatibilityLevel": "JAVA_8",
+  "package": "dev.bozho.mixins",
+  "refmap": "mixins.thaliascripts.refmap.json",
+  "mixins": [
+    "EntityRendererAccessor",
+    "MinecraftAccessor",
+    "RenderManagerAccessor"
+  ],
+  "client": []
+}
