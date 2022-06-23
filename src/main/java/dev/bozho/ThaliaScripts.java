@@ -20,6 +20,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -30,7 +32,8 @@ public class ThaliaScripts {
     public static Minecraft mc = Minecraft.getMinecraft();
     public static KeyBinding debugBind;
     public static int debug = 0;
-    public final Animation animation =  new Animation();
+    public static final Logger logger = LogManager.getLogger();
+    public final Animation animation = new Animation();
 
     @Mod.EventHandler
     public void onFMLInitialization(FMLInitializationEvent event) {
