@@ -1,6 +1,9 @@
+import dev.architectury.pack200.java.Pack200Adapter
+
 plugins {
     kotlin("jvm") version "1.6.21"
     id("gg.essential.loom")
+    id("dev.architectury.architectury-pack200") version "0.1.3"
 }
 
 val modVersion = "0.0.1"
@@ -12,10 +15,11 @@ base.archivesName.set(modBaseName)
 
 loom {
     forge {
-        mixinConfig("tscripts.mixins.json")
+        pack200Provider.set(Pack200Adapter())
+        mixinConfig("thaliascripts.mixins.json")
     }
     mixin {
-        defaultRefmapName.set("tscripts.mixins.refmap.json")
+        defaultRefmapName.set("thaliascripts.mixins.refmap.json")
     }
     launchConfigs {
         getByName("client") {
@@ -23,7 +27,7 @@ loom {
             property("mixin.debug.export", "true")
             property("mixin.dumpTargetOnFailure", "true")
             arg("--tweakClass", "gg.essential.loader.stage0.EssentialSetupTweaker")
-            arg("--mixin", "tscripts.mixins.json")
+            arg("--mixin", "thaliascripts.mixins.json")
         }
     }
 }
@@ -83,7 +87,7 @@ tasks.jar {
         "Main-Class" to "dev.bozho.ThaliaScripts",
         "TweakClass" to "gg.essential.loader.stage0.EssentialSetupTweaker",
         "TweakOrder" to "0",
-        "MixinConfigs" to "tscripts.mixins.json"
+        "MixinConfigs" to "thaliascripts.mixins.json"
     ))
 }
 
