@@ -1,7 +1,6 @@
 package dev.bozho.utils
 
 import dev.bozho.ThaliaScripts.mc
-import utils.ReflectionUtil
 
 object MouseUtil {
     enum class Buttons(val button: Int) {

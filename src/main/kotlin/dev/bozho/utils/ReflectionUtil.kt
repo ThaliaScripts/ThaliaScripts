@@ -1,4 +1,4 @@
-package utils
+package dev.bozho.utils
 
 object ReflectionUtil {
     fun invoke(obj: Any, methodName: String): Boolean {
