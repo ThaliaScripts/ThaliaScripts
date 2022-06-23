@@ -1,6 +1,6 @@
 package dev.bozho.utils
 
-import dev.bozho.ThaliaScripts.mc
+import dev.bozho.ThaliaScripts.Companion.mc
 
 object MouseUtil {
     enum class Buttons(val button: Int) {
