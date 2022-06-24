@@ -34,8 +34,6 @@ loom {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven("https://repo.sk1er.club/repository/maven-public/")
-    maven("https://repo.sk1er.club/repository/maven-releases/")
     maven("https://repo.spongepowered.org/maven/")
     maven("https://jitpack.io")
 }
@@ -53,18 +51,18 @@ dependencies {
     compileOnly("com.github.Minikloon:FSMgasm:-SNAPSHOT")
 }
 
+kotlin {
+    jvmToolchain {
+        check(this is JavaToolchainSpec)
+        languageVersion.set(JavaLanguageVersion.of(8))
+    }
+}
+
 tasks.compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
         freeCompilerArgs = listOf("-opt-in=kotlin.RequiresOptIn", "-Xjvm-default=all", "-Xrelease=8", "-Xbackend-threads=0")
         languageVersion = "1.6"
-    }
-}
-
-kotlin {
-    jvmToolchain {
-        check(this is JavaToolchainSpec)
-        languageVersion.set(JavaLanguageVersion.of(8))
     }
 }
 
