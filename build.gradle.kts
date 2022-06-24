@@ -77,6 +77,8 @@ tasks.jar {
         "Main-Class" to "dev.bozho.ThaliaScripts",
         "TweakOrder" to "0",
         "MixinConfigs" to "thaliascripts.mixins.json"
+        "ForceLoadAsMod" to true,
+        "TweakClass" to "cc.polyfrost.oneconfigwrapper.OneConfigWrapper"
     ))
 }
 
