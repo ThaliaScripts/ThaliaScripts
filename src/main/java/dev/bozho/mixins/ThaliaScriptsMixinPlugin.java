@@ -2,6 +2,7 @@ package dev.bozho.mixins;
 
 import net.minecraft.launchwrapper.Launch;
 import org.objectweb.asm.tree.ClassNode;
+import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 public class ThaliaScriptsMixinPlugin implements IMixinConfigPlugin {
+
     boolean deobfEnvironment = false;
 
     @Override
@@ -17,6 +19,7 @@ public class ThaliaScriptsMixinPlugin implements IMixinConfigPlugin {
         if (deobfEnvironment) {
             System.out.println("We are in a deobfuscated environment, loading compatibility mixins.");
         }
+        MixinBootstrap.init();
     }
 
     @Override
@@ -44,9 +47,12 @@ public class ThaliaScriptsMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+
     }
 
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+
     }
+
 }
