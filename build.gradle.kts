@@ -36,6 +36,7 @@ repositories {
     mavenCentral()
     maven("https://repo.sk1er.club/repository/maven-public/")
     maven("https://repo.sk1er.club/repository/maven-releases/")
+    maven("https://repo.spongepowered.org/maven/")
     maven("https://jitpack.io")
 }
 
@@ -47,10 +48,10 @@ dependencies {
     mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
     forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
 
-    embed("com.github.LlamaLad7:MixinExtras:0.0.8")
-    annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.8")
-    annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
-    compileOnly("org.spongepowered:mixin:0.8.5")
+    embed("com.github.LlamaLad7:MixinExtras:0.0.6")
+    annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.6")
+    annotationProcessor("org.spongepowered:mixin:0.7.11-SNAPSHOT:processor")
+    compileOnly("org.spongepowered:mixin:0.7.11-SNAPSHOT")
 
     compileOnly("com.github.Minikloon:FSMgasm:-SNAPSHOT")
 }
