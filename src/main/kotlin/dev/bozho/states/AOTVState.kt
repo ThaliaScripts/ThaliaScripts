@@ -9,7 +9,8 @@ import java.util.*
 class AOTVState(block: Vec3, states: List<State> = getAOTVStates(block)) : StateSeries(states) {
     companion object {
         fun getAOTVStates(block: Vec3): List<State> {
-            return Arrays.asList(RotationState(block), WaitState((5..15).random()), ClickState(MouseUtil.Buttons.RightButton))
+            TODO("IMPLEMENT AOTV IDIOT")
+            //return Arrays.asList(RotationState(block), WaitState((5..15).random()), ClickState(MouseUtil.Buttons.RightButton))
         }
     }
 

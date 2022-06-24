@@ -7,6 +7,7 @@ import kotlin.math.sin
 
 object RandomRotation : Rotation() {
     private val rotationList: List<Rotation>
+    private var usingFunction: Rotation
 
     init {
         rotationList = listOf(
@@ -23,10 +24,16 @@ object RandomRotation : Rotation() {
             EaseOutQuart(),
             EaseInOutQuart()
         )
+
+        usingFunction = rotationList.random()
+    }
+
+    fun changeFunction() {
+        usingFunction = rotationList.random()
     }
 
     override fun getFloat(x: Float): Float {
-        return rotationList.random().getFloat(x)
+        return usingFunction.getFloat(x)
     }
 
     class EaseInSine : Rotation() {

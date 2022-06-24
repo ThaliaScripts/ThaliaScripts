@@ -2,6 +2,7 @@ package dev.bozho
 
 import dev.bozho.mixins.MinecraftAccessor
 import dev.bozho.mixins.RenderManagerAccessor
+import dev.bozho.states.StateHandler
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.settings.KeyBinding
@@ -29,8 +30,17 @@ class ThaliaScripts {
     @Mod.EventHandler
     fun onFMLInitialization(event: FMLInitializationEvent?) {
         MinecraftForge.EVENT_BUS.register(this)
+        MinecraftForge.EVENT_BUS.register(StateHandler)
         debugBind = KeyBinding("debug", Keyboard.KEY_O, "ThaliaScripts")
         ClientRegistry.registerKeyBinding(debugBind)
+    }
+
+    @SubscribeEvent
+    fun onInput(event: InputEvent) {
+        if (debugBind?.isPressed == true) {
+            StateHandler.scheduleRotateState()
+            StateHandler.startState()
+        }
     }
 
     @SubscribeEvent

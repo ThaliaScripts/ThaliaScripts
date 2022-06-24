@@ -1,5 +1,6 @@
 package dev.bozho.states
 
+import dev.bozho.ThaliaScripts.Companion.mc
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 import net.minikloon.fsmgasm.StateSeries
@@ -10,7 +11,7 @@ object StateHandler {
     fun scheduleRotateState() {
         state = StateSeries(
             WaitState(20),
-            //RotationState(mc.thePlayer.rotationYaw + 180F, mc.thePlayer.rotationPitch, 25)
+            RotationState(mc.thePlayer.rotationYaw + 180F, mc.thePlayer.rotationPitch, 25)
         )
     }
 
@@ -32,6 +33,10 @@ object StateHandler {
 
     @SubscribeEvent
     fun onTick(event: TickEvent.ClientTickEvent) {
+        if (event.phase == TickEvent.Phase.END) {
+            return
+        }
+
         if (state.started && !state.ended) {
             state.update()
         }

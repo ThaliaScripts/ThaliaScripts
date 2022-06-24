@@ -9,9 +9,7 @@ plugins {
     id("gg.essential.loom") version "0.10.0.+"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("dev.architectury.architectury-pack200") version "0.1.3"
-    idea
     java
-    signing
 }
 
 val modVersion = "0.0.1"
@@ -46,14 +44,6 @@ repositories {
     maven("https://jitpack.io")
 }
 
-val shadowMe: Configuration by configurations.creating {
-    configurations.implementation.get().extendsFrom(this)
-}
-
-val shadowMeMod: Configuration by configurations.creating {
-    configurations.modImplementation.get().extendsFrom(this)
-}
-
 val embed by configurations.creating
 configurations.implementation.get().extendsFrom(embed)
 
@@ -65,7 +55,7 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
     compileOnly("org.spongepowered:mixin:0.8.5")
 
-    compileOnly("com.github.Minikloon:FSMgasm:-SNAPSHOT")
+    embed("com.github.Minikloon:FSMgasm:-SNAPSHOT")
 }
 
 sourceSets {
@@ -113,7 +103,7 @@ tasks {
         archiveBaseName.set("ThaliaScripts")
         archiveClassifier.set("dev")
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-        configurations = listOf(shadowMe, shadowMeMod)
+        configurations = listOf(embed)
 
 //        relocate("com.llamalad7.mixinextras", "ThaliaScripts.mixinextras")
 

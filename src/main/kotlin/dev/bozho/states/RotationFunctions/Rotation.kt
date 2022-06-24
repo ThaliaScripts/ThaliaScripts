@@ -29,7 +29,7 @@ abstract class Rotation {
 
         val length = end - start
         val pointsList = List(size) {
-            this.getFloat(1f / size * it) * length + start
+            this.getFloat(1f / size * (it + 1)) * length + start
         }.toMutableList()
 
         return pointsList
