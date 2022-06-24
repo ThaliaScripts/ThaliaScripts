@@ -36,6 +36,7 @@ repositories {
     mavenCentral()
     maven("https://repo.spongepowered.org/maven/")
     maven("https://jitpack.io")
+    maven("https://repo.polyfrost.cc/releases")
 }
 
 val embed by configurations.creating
@@ -49,6 +50,8 @@ dependencies {
     embed("org.spongepowered:mixin:0.8.5-SNAPSHOT")
 
     compileOnly("com.github.Minikloon:FSMgasm:-SNAPSHOT")
+    compileOnly("cc.polyfrost:oneconfig-1.8.9-forge:0.1.0-alpha26")
+    embed("cc.polyfrost:oneconfig-wrapper-1.8.9-forge:1.0.0-alpha6")
 }
 
 kotlin {
