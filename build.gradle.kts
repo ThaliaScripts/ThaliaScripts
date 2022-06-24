@@ -54,8 +54,6 @@ dependencies {
 
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
     compileOnly("org.spongepowered:mixin:0.8.5")
-
-    embed("com.github.Minikloon:FSMgasm:-SNAPSHOT")
 }
 
 sourceSets {

@@ -1,4 +1,4 @@
-package dev.bozho.states.RotationFunctions
+package dev.bozho.states.rotationfunctions
 
 import kotlin.math.PI
 import kotlin.math.cos

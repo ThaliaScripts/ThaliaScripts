@@ -1,7 +1,6 @@
 package dev.bozho.states
 
 import dev.bozho.utils.MouseUtil
-import java.time.Duration
 
 class ClickState(buttonType: MouseUtil.Buttons) : LoggedState() {
     private val button: MouseUtil.Buttons = buttonType
@@ -18,12 +17,12 @@ class ClickState(buttonType: MouseUtil.Buttons) : LoggedState() {
     }
 
     override fun onEnd() {
-        this.LogState()
+        this.logState()
     }
 
-    override fun GetLogMessage(): String {
-        return super.GetLogMessage() + " " + button.toString() + " Button Clicked"
+    override fun getLogMessage(): String {
+        return super.getLogMessage() + " " + button.toString() + " Button Clicked"
     }
 
-    override val duration: Duration = Duration.ZERO
+    override val duration: Int = 0
 }

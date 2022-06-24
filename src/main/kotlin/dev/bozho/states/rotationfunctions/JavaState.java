@@ -1,6 +1,6 @@
-package dev.bozho.states.RotationFunctions;
+package dev.bozho.states.rotationfunctions;
 
-import net.minikloon.fsmgasm.State;
+import dev.bozho.states.statelibrary.State;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Duration;

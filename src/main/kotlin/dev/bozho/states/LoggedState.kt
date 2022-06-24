@@ -1,14 +1,14 @@
 package dev.bozho.states
 
 import dev.bozho.ThaliaScripts
-import net.minikloon.fsmgasm.State
+import dev.bozho.states.statelibrary.State
 
 abstract class LoggedState : State() {
-    open fun GetLogMessage(): String {
+    open fun getLogMessage(): String {
         return "Executing " + this.javaClass.name + " state!"
     }
 
-    fun LogState() {
-        ThaliaScripts.logger.info(GetLogMessage())
+    fun logState() {
+        ThaliaScripts.logger.info(getLogMessage())
     }
 }
