@@ -2,7 +2,6 @@ package dev.bozho
 
 import dev.bozho.mixins.MinecraftAccessor
 import dev.bozho.mixins.RenderManagerAccessor
-import dev.bozho.utils.animations.Animation
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.settings.KeyBinding
@@ -26,7 +25,6 @@ import java.awt.Color
 
 @Mod(modid = "forgetemplate", name = "Forge Template", version = "0.0.1")
 class ThaliaScripts {
-    val animation = Animation()
     @Mod.EventHandler
     fun onFMLInitialization(event: FMLInitializationEvent?) {
         MinecraftForge.EVENT_BUS.register(this)

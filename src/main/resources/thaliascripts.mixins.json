@@ -1,6 +1,7 @@
 {
   "compatibilityLevel": "JAVA_8",
   "package": "dev.bozho.mixins",
+  "plugin": "dev.bozho.mixins.ThaliaScriptsMixinPlugin",
   "refmap": "thaliascripts.mixins.refmap.json",
   "mixins": [
     "EntityRendererAccessor",
