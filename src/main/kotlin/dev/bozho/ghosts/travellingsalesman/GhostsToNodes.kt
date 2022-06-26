@@ -34,7 +34,7 @@ private fun SimpleDirectedGraph<EntityGhost, Edge>.fillEdges(ghosts: List<Entity
     ghosts.forEach { source ->
         val found = mutableListOf<Edge>()
 
-        val ghostsWithoutIt = ghosts.filter { target -> source != target}
+        val ghostsWithoutIt = ghosts.filter { target -> source != target }
         ghostsWithoutIt.forEach { target ->
             val distance = source.getDistance(target)
             if (distance < minDistance) {
