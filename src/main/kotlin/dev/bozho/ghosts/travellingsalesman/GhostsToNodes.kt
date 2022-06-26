@@ -1,4 +1,4 @@
-package dev.bozho.travellingsalesman
+package dev.bozho.ghosts.travellingsalesman
 
 import dev.bozho.ghosts.EntityGhost
 import dev.bozho.ghosts.EntityGhost.Companion.reload
@@ -7,13 +7,12 @@ import org.jgrapht.graph.SimpleDirectedGraph
 
 operator fun <V> Graph<V, *>.plusAssign(vertex:V) { addVertex(vertex) }
 operator fun Graph<EntityGhost, Edge>.plusAssign(edge: Edge) { addEdge(edge.source, edge.target, edge) }
-operator fun Graph<EntityGhost, Edge>.plusAssign(edges: List<Edge>) { edges.forEach { this += it } }
 
 const val minDistance = 5
 
 fun SimpleDirectedGraph<EntityGhost, Edge>.fillGraph(): Boolean {
     val list = EntityGhost.listOfGhosts.reload()
-    if (!list.isEmpty()) {
+    if (list.isNotEmpty()) {
         return false
     }
 

@@ -55,7 +55,7 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
     compileOnly("org.spongepowered:mixin:0.8.5")
 
-    embed("org.jgrapht:jgrapht-core:1.5.1")
+    compileOnly("org.jgrapht:jgrapht-core:1.5.1")
 }
 
 sourceSets {

@@ -1,4 +1,4 @@
-package dev.bozho.travellingsalesman
+package dev.bozho.ghosts.travellingsalesman
 
 import dev.bozho.ThaliaScripts.Companion.logger
 import dev.bozho.ghosts.EntityGhost

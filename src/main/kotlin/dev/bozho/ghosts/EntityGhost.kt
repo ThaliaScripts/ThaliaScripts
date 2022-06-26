@@ -13,6 +13,8 @@ class EntityGhost private constructor(world: World?) : EntityCreeper(world) {
         }
 
         var listOfGhosts: List<EntityGhost> = emptyList()
+            private set
+
 
         private fun getGhosts(): List<EntityGhost> {
             return ThaliaScripts.mc.theWorld.loadedEntityList.filter { it is EntityCreeper && it.isInvisible }.map { it as EntityGhost }

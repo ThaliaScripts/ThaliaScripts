@@ -1,4 +1,4 @@
-package dev.bozho.travellingsalesman
+package dev.bozho.ghosts.travellingsalesman
 
 import dev.bozho.ghosts.EntityGhost
 import org.jgrapht.graph.SimpleDirectedGraph
