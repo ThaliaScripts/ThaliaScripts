@@ -1,8 +1,5 @@
 package dev.bozho.states.statelibrary
 
-import net.minikloon.fsmgasm.StateHolder
-import java.time.Duration
-
 open class StateGroup(states: List<State> = emptyList()) : StateHolder(states) {
     constructor(vararg states: State) : this(states.toList())
 

@@ -1,8 +1,5 @@
 package dev.bozho.states.statelibrary
 
-import net.minikloon.fsmgasm.StateHolder
-import java.time.Duration
-
 open class StateSeries(states: List<State> = emptyList()) : StateHolder(states) {
     protected var current = 0
     protected var skipping: Boolean = false

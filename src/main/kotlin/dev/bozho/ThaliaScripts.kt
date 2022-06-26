@@ -3,6 +3,7 @@ package dev.bozho
 import dev.bozho.mixins.MinecraftAccessor
 import dev.bozho.mixins.RenderManagerAccessor
 import dev.bozho.states.StateHandler
+import dev.bozho.travellingsalesman.TestClass
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.settings.KeyBinding
@@ -38,8 +39,7 @@ class ThaliaScripts {
     @SubscribeEvent
     fun onInput(event: InputEvent) {
         if (debugBind?.isPressed == true) {
-            StateHandler.scheduleRotateState()
-            StateHandler.startState()
+            TestClass.printFound()
         }
     }
 

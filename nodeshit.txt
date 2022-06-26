@@ -1,0 +1,4 @@
+Imame grafa koqto e nodes i edges
+svyrzvame vseki node s nai blizki 5 i kalkulirame weight
+feedvame info na salesman algorityma da si smqta i ni dava 10-20 rough answers
+izchislqvame angle weight na seki ot tezi 10-20 patha i taka izbirame final answer

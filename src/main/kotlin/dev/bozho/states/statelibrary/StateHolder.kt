@@ -1,6 +1,4 @@
-package net.minikloon.fsmgasm
-
-import dev.bozho.states.statelibrary.State
+package dev.bozho.states.statelibrary
 
 abstract class StateHolder(states: List<State> = emptyList()) : State(), Iterable<State> {
     protected val states: MutableList<State> = states.toMutableList()
