@@ -1,8 +1,8 @@
 package dev.bozho.ghosts.travellingsalesman
 
+import com.google.common.graph.*
 import dev.bozho.ThaliaScripts.Companion.logger
 import dev.bozho.ghosts.EntityGhost
-import org.jgrapht.graph.SimpleDirectedGraph
 
 object TestClass {
     private var working = false
@@ -14,7 +14,7 @@ object TestClass {
 
         working = true
         Thread {
-            val graph = SimpleDirectedGraph<EntityGhost, Edge>(Edge::class.java)
+            val graph: MutableNetwork<EntityGhost, Edge> = NetworkBuilder.directed().build()
             if (!graph.fillGraph()) {
                 return@Thread
             }

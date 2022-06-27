@@ -1,34 +1,33 @@
 package dev.bozho.ghosts.travellingsalesman
 
+import com.google.common.graph.MutableNetwork
 import dev.bozho.ghosts.EntityGhost
 import dev.bozho.ghosts.EntityGhost.Companion.reload
-import org.jgrapht.Graph
-import org.jgrapht.graph.SimpleDirectedGraph
 
-operator fun <V> Graph<V, *>.plusAssign(vertex:V) { addVertex(vertex) }
-operator fun Graph<EntityGhost, Edge>.plusAssign(edge: Edge) { addEdge(edge.source, edge.target, edge) }
+operator fun <V> MutableNetwork<V, *>.plusAssign(node:V) { addNode(node) }
+operator fun MutableNetwork<EntityGhost, Edge>.plusAssign(edge: Edge) { addEdge(edge.source, edge.target, edge) }
 
 const val minDistance = 5
 
-fun SimpleDirectedGraph<EntityGhost, Edge>.fillGraph(): Boolean {
+fun MutableNetwork<EntityGhost, Edge>.fillGraph(): Boolean {
     val list = EntityGhost.listOfGhosts.reload()
     if (list.isNotEmpty()) {
         return false
     }
 
-    this.fillGhosts(list)
-    this.fillEdges(list)
+    fillGhosts(list)
+    fillEdges(list)
 
     return true
 }
 
-private fun SimpleDirectedGraph<EntityGhost, Edge>.fillGhosts(ghosts: List<EntityGhost>) {
+private fun MutableNetwork<EntityGhost, Edge>.fillGhosts(ghosts: List<EntityGhost>) {
     ghosts.forEach {
         this += it
     }
 }
 
-private fun SimpleDirectedGraph<EntityGhost, Edge>.fillEdges(ghosts: List<EntityGhost>) {
+private fun MutableNetwork<EntityGhost, Edge>.fillEdges(ghosts: List<EntityGhost>) {
     val edges = mutableListOf<Edge>()
 
     ghosts.forEach { source ->
