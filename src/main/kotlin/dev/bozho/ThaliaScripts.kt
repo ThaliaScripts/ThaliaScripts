@@ -1,11 +1,13 @@
 package dev.bozho
 
+import dev.bozho.ghosts.travellingsalesman.TestClass
 import dev.bozho.mixins.MinecraftAccessor
 import dev.bozho.mixins.RenderManagerAccessor
 import dev.bozho.states.StateHandler
-import dev.bozho.ghosts.travellingsalesman.TestClass
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
+import net.minecraft.client.renderer.Tessellator
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats
 import net.minecraft.client.settings.KeyBinding
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
@@ -26,6 +28,7 @@ import org.lwjgl.input.Keyboard
 import org.lwjgl.opengl.GL11
 import java.awt.Color
 
+
 @Mod(modid = "forgetemplate", name = "Forge Template", version = "0.0.1")
 class ThaliaScripts {
     @Mod.EventHandler
@@ -41,6 +44,26 @@ class ThaliaScripts {
         if (debugBind?.isPressed == true) {
             TestClass.printFound()
         }
+    }
+    private fun lineBetweenTwoEntities(e1: Entity, e2: Entity, color: Color) {
+        val vpX: Double = mc.renderManager.viewerPosX
+        val vpY: Double = mc.renderManager.viewerPosY
+        val vpZ: Double = mc.renderManager.viewerPosZ
+        GlStateManager.pushMatrix()
+        GL11.glDisable(2929)
+        GL11.glDisable(2896)
+        GL11.glDisable(3553)
+        GL11.glColor4f(color.red.toFloat(), color.green.toFloat(), color.blue.toFloat(), color.alpha.toFloat())
+        val tessellator = Tessellator.getInstance()
+        val worldrenderer = tessellator.worldRenderer
+        worldrenderer.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION)
+        worldrenderer.pos(e1.posX - vpX, e2.posY - vpY, e1.posZ - vpZ).endVertex()
+        worldrenderer.pos(e2.posX - vpX, e2.posY - vpY, e2.posZ - vpZ).endVertex()
+        tessellator.draw()
+        GL11.glEnable(3553)
+        GL11.glEnable(2896)
+        GL11.glEnable(2929)
+        GlStateManager.popMatrix()
     }
 
     @SubscribeEvent
@@ -59,6 +82,12 @@ class ThaliaScripts {
 
     @SubscribeEvent
     fun onRender3D(event: RenderWorldLastEvent?) {
+        TestClass.path?.let {
+            it.forEach { element ->
+                lineBetweenTwoEntities(element.source, element.target, Color(255, 0, 0))
+            }
+        }
+
         val fr = mc.fontRendererObj
         mc.theWorld.loadedEntityList.stream().filter { entity: Entity? -> entity is EntityCreeper }
             .forEach { entity: Entity ->

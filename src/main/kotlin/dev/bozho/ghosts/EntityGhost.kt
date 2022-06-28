@@ -2,32 +2,24 @@ package dev.bozho.ghosts
 
 import dev.bozho.ThaliaScripts
 import net.minecraft.entity.monster.EntityCreeper
-import net.minecraft.world.World
-import kotlin.math.sqrt
 
-class EntityGhost private constructor(world: World?) : EntityCreeper(world) {
-    companion object {
-        fun List<EntityGhost>.reload(): List<EntityGhost> {
-            EntityGhost.listOfGhosts = EntityGhost.getGhostsInBox()
-            return EntityGhost.listOfGhosts
-        }
+fun EntityCreeper.getDistance(entity: EntityCreeper): Double {
+    return getDistance(entity.posX, posY, entity.posZ)
+}
 
-        var listOfGhosts: List<EntityGhost> = emptyList()
-            private set
-
-
-        private fun getGhosts(): List<EntityGhost> {
-            return ThaliaScripts.mc.theWorld.loadedEntityList.filter { it is EntityCreeper && it.isInvisible }.map { it as EntityGhost }
-        }
-
-        private fun getGhostsInBox(): List<EntityGhost> {
-            return getGhosts()
-        }
+object EntityCreeperHelper {
+    fun List<EntityCreeper>.reload(): List<EntityCreeper> {
+        listOfGhosts = getGhostsInBox()
+        return listOfGhosts
     }
 
-    fun getDistance(entity: EntityGhost): Double {
-        val diffX = posX - entity.posX
-        val diffY = posY - entity.posY
-        return sqrt(diffX * diffX + diffY * diffY)
+    var listOfGhosts: List<EntityCreeper> = emptyList()
+        private set
+
+    private fun getGhosts(): List<EntityCreeper> {
+        return ThaliaScripts.mc.theWorld.loadedEntityList.filter { it is EntityCreeper && it.powered }.map { it as EntityCreeper }}
+
+    private fun getGhostsInBox(): List<EntityCreeper> {
+        return getGhosts()
     }
 }

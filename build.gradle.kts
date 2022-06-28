@@ -1,12 +1,12 @@
-//import dev.architectury.pack200.java.Pack200Adapter
+import gg.essential.gradle.util.makeConfigurationForInternalDependencies
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.6.21"
     id("gg.essential.loom") version "0.10.0.+"
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-    //id("dev.architectury.architectury-pack200") version "0.1.3"
+    id("gg.essential.defaults") version "0.1.10"
     java
+    idea
 }
 
 val modVersion = "0.0.1"
@@ -18,7 +18,6 @@ base.archivesName.set(modBaseName)
 
 loom {
     forge {
-        //pack200Provider.set(Pack200Adapter())
         mixinConfig("thaliascripts.mixins.json")
     }
     mixin {
@@ -39,6 +38,11 @@ repositories {
     mavenCentral()
     maven("https://repo.spongepowered.org/maven/")
     maven("https://jitpack.io")
+    maven("https://repo.essential.gg/repository/maven-public")
+}
+
+val internal = makeConfigurationForInternalDependencies {
+    relocate("com.google", "thaliascripts.google")
 }
 
 val embed by configurations.creating
@@ -52,7 +56,7 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
     compileOnly("org.spongepowered:mixin:0.8.5")
 
-    embed("com.google.guava:guava:31.1-jre")
+    embed("org.jgrapht:jgrapht-core:1.3.1")
 }
 
 sourceSets {
@@ -73,6 +77,10 @@ tasks {
     }
     named<Jar>("jar") {
         from(embed.files.map { zipTree(it) })
+
+        exclude("**/module-info.class")
+        exclude("**/package-info.class")
+
         manifest {
             attributes(
                 mapOf(

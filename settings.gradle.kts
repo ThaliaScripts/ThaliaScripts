@@ -10,5 +10,6 @@ pluginManagement {
     }
     plugins {
         id("gg.essential.defaults")// version "0.10.0.2"
+        //id("gg.essential.multi-version")
     }
 }
