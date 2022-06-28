@@ -1,12 +1,7 @@
 package dev.bozho.ghosts.travellingsalesman
 
-import dev.bozho.ThaliaScripts.Companion.logger
 import net.minecraft.entity.monster.EntityCreeper
-import org.apache.commons.math3.analysis.interpolation.AkimaSplineInterpolator
-import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction
 import org.jgrapht.Graph
-import org.jgrapht.GraphPath
-import org.jgrapht.graph.SimpleDirectedGraph
 import org.jgrapht.graph.SimpleWeightedGraph
 
 object TestClass {
