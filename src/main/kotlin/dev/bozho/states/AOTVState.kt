@@ -1,23 +1,29 @@
 package dev.bozho.states
 
-import dev.bozho.utils.MouseUtil
 import net.minecraft.util.Vec3
-import dev.bozho.states.statelibrary.State
-import dev.bozho.states.statelibrary.StateGroup
-import dev.bozho.states.statelibrary.StateSeries
+import dev.bozho.states.KeyButtonState.KeyboardButtons
+import net.minikloon.fsmgasm.State
+import net.minikloon.fsmgasm.StateGroup
+import net.minikloon.fsmgasm.StateSeries
 
-class AOTVState(private val teleportingTo: Vec3, states: List<State> = getAOTVStates(teleportingTo)) : StateGroup(states) {
+class AOTVState(private val teleportingTo: Vec3, states: List<State> = getAOTVStates(teleportingTo)) : StateSeries(states) {
     companion object {
         fun getAOTVStates(block: Vec3): List<State> {
-
-            val series = StateSeries(
-                RotationState(block, 5),
-                EmptyState((5..15).random()), ClickState(MouseUtil.Buttons.RightButton)
-            )
+            val rotationRandomness = (5..15).random()
+            val waitBeforeDuckRandomness = (5..15).random()
+            val duckRandomness = (10..15).random()
+            val rightClickRandomness = (8..duckRandomness).random()
 
             return listOf(
-                series,
-                DuckState(series.duration)
+                DynamicRotationState(block, rotationRandomness, true),
+                EmptyState(waitBeforeDuckRandomness),
+                StateGroup(
+                    KeyButtonState(duckRandomness, KeyboardButtons.Sneak),
+                    StateSeries(
+                        EmptyState(rightClickRandomness),
+                        KeyButtonState(1, KeyboardButtons.UseItem)
+                    )
+                )
             )
         }
     }

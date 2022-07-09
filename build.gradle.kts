@@ -1,10 +1,10 @@
-import gg.essential.gradle.util.makeConfigurationForInternalDependencies
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.6.21"
     id("gg.essential.loom") version "0.10.0.+"
     id("gg.essential.defaults") version "0.1.10"
+    id("org.openjfx.javafxplugin") version "0.0.10"
     java
     idea
 }
@@ -38,11 +38,6 @@ repositories {
     mavenCentral()
     maven("https://repo.spongepowered.org/maven/")
     maven("https://jitpack.io")
-    maven("https://repo.essential.gg/repository/maven-public")
-}
-
-val internal = makeConfigurationForInternalDependencies {
-    relocate("com.google", "thaliascripts.google")
 }
 
 val embed by configurations.creating
@@ -57,6 +52,7 @@ dependencies {
     compileOnly("org.spongepowered:mixin:0.8.5")
 
     embed("org.jgrapht:jgrapht-core:1.3.1")
+    embed("com.github.mi0epro:MCFSMgasm:master-SNAPSHOT")
 }
 
 sourceSets {

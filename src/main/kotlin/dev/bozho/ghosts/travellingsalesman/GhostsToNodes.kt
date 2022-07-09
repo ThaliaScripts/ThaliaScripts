@@ -1,11 +1,9 @@
 package dev.bozho.ghosts.travellingsalesman
 
-import dev.bozho.ThaliaScripts.Companion.logger
 import dev.bozho.ghosts.EntityCreeperHelper
 import dev.bozho.ghosts.EntityCreeperHelper.reload
 import net.minecraft.entity.monster.EntityCreeper
 import org.jgrapht.graph.SimpleWeightedGraph
-import org.jgrapht.graph.WeightedMultigraph
 
 
 fun SimpleWeightedGraph<EntityCreeper, Edge>.fillGraph(): Boolean {
@@ -34,9 +32,7 @@ private fun SimpleWeightedGraph<EntityCreeper, Edge>.fillEdges() {
         }
     }
 
-    var dick = 0
     edgeSet().forEach {
-        logger.info("" + ++dick)
         setEdgeWeight(it, it.distance)
     }
 }
