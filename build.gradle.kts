@@ -9,7 +9,7 @@ plugins {
 }
 
 val modVersion = "0.0.1"
-val modGroup = "dev.bozho"
+val modGroup = "com.thaliascripts"
 val modBaseName = "ThaliaScripts"
 version = modVersion
 group = modGroup
