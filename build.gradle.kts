@@ -4,7 +4,6 @@ plugins {
     kotlin("jvm") version "1.6.21"
     id("gg.essential.loom") version "0.10.0.+"
     id("gg.essential.defaults") version "0.1.10"
-    id("org.openjfx.javafxplugin") version "0.0.10"
     java
     idea
 }
@@ -52,7 +51,7 @@ dependencies {
     compileOnly("org.spongepowered:mixin:0.8.5")
 
     embed("org.jgrapht:jgrapht-core:1.3.1")
-    embed("com.github.mi0epro:MCFSMgasm:master-SNAPSHOT")
+    embed("com.github.mi0epro:MCFSMgasm:-SNAPSHOT")
 }
 
 sourceSets {
