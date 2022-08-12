@@ -7,43 +7,47 @@ import net.minecraftforge.client.event.ClientChatReceivedEvent
 import net.minecraftforge.event.world.WorldEvent
 import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.fml.common.gameevent.TickEvent
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientDisconnectionFromServerEvent
+import java.lang.Thread.sleep
 import java.util.*
 
 private val gson = Gson()
 
-object MapUtils {
-    var inHypixel = false
-    var gametype = ""
-    var mode = ""
-    var server = ""
+object RawLocationParser {
+    private var inHypixel = false
+    private var gametype = ""
+    private var mode = ""
+    private var server = ""
 
-    private var lastLoad: Long = 0
-    private var check = false
     private var waitingForLocraw = false
-
-    @SubscribeEvent
-    fun onDisconnect(event: ClientDisconnectionFromServerEvent) {
-        inHypixel = false
-        check = false
-        waitingForLocraw = false
-        server = ""
-    }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     fun onWorldLoad(event: WorldEvent.Load) {
-        lastLoad = System.currentTimeMillis()
-        check = true
+        if (!inHypixel) {
+            return
+        }
+
+        Thread {
+            sleep(1300)
+            mc.thePlayer.sendChatMessage("/locraw")
+            waitingForLocraw = true
+        }.start()
     }
 
-    fun parseLocation(loc: JsonObject) {
+    private fun parseLocation(msg: String) {
+        lateinit var loc: JsonObject
+        try {
+            loc = gson.fromJson(msg, JsonObject::class.java)
+            if (loc.has("server")) {
+                waitingForLocraw = false
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         gametype = if (loc.has("gametype")) loc.get("gametype").toString().replace("\"", "") else ""
         mode = if (loc.has("mode")) loc.get("mode").toString().replace("\"", "") else ""
-        val newServer: String = loc.get("server").toString()
-        if (newServer != server) {
-            server = newServer
-        }
+        server = loc.get("server").toString()
     }
 
     @SubscribeEvent(priority = EventPriority.LOW, receiveCanceled = true)
@@ -52,61 +56,39 @@ object MapUtils {
             return
         }
         val msg: String = event.message.unformattedText
-        if (msg.startsWith("{") &&
-            msg.endsWith("}")
-        ) {
-            try {
-                val obj: JsonObject = gson.fromJson(msg, JsonObject::class.java)
-                if (obj.has("server")) {
-                    waitingForLocraw = false
-                    parseLocation(obj)
-                }
-                event.isCanceled = true
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+        if (msg.startsWith("{") && msg.endsWith("}")) {
+            parseLocation(msg)
         }
+    }
+
+    fun onClientBrandChanged(brand: String) {
+        inHypixel = brand.lowercase(Locale.getDefault()).contains("hypixel")
     }
 
     @SubscribeEvent
-    fun onTick(event: TickEvent.ClientTickEvent) {
-        if (event.phase !== TickEvent.Phase.START || mc.thePlayer == null || mc.theWorld == null ||
-            mc.isSingleplayer || mc.thePlayer.clientBrand == null || !check
-        ) {
-            return
-        }
-
-        // Only check after a new map is loaded
-        val currentTime = System.currentTimeMillis()
-        val msToWait = 1300
-        if (currentTime - lastLoad > msToWait) {
-            check = false
-
-            // Check if in Hypixel
-            if (!mc.thePlayer.clientBrand.lowercase(Locale.getDefault()).contains("hypixel")) {
-                return
-            }
-            inHypixel = true
-            mc.thePlayer.sendChatMessage("/locraw")
-            waitingForLocraw = true
-        }
+    fun onDisconnect(event: ClientDisconnectionFromServerEvent) {
+        inHypixel = false
     }
 
-    enum class SkyblockIsland(var islandName: String, var mode: String) {
-        PrivateIsland("Private Island", "dynamic"),
-        SpiderDen("Spider's Den", "combat_1"),
-        CrimsonIsle("Crimson Isle", "crimson_isle"),
-        TheEnd("The End", "combat_3"),
-        GoldMine("Gold Mine", "mining_1"),
-        DeepCaverns("Deep Caverns", "mining_2"),
-        DwarvenMines("Dwarven Mines", "mining_3"),
-        CrystalHollows("Crystal Hollows", "crystal_hollows"),
-        FarmingIsland("The Farming Islands", "farming_1"),
-        ThePark("The Park", "foraging_1"),
-        Dungeon("Dungeon", "dungeon"),
-        DungeonHub("Dungeon Hub", "dungeon_hub"),
-        Hub("Hub", "hub"),
-        DarkAuction("Dark Auction", "dark_auction"),
-        JerryWorkshop("Jerry's Workshop", "winter");
+    fun checkMode(mode: SkyblockIsland): Boolean {
+        return inHypixel && this.mode == mode.mode
     }
+}
+
+enum class SkyblockIsland(var islandName: String, var mode: String) {
+    PrivateIsland("Private Island", "dynamic"),
+    SpiderDen("Spider's Den", "combat_1"),
+    CrimsonIsle("Crimson Isle", "crimson_isle"),
+    TheEnd("The End", "combat_3"),
+    GoldMine("Gold Mine", "mining_1"),
+    DeepCaverns("Deep Caverns", "mining_2"),
+    DwarvenMines("Dwarven Mines", "mining_3"),
+    CrystalHollows("Crystal Hollows", "crystal_hollows"),
+    FarmingIsland("The Farming Islands", "farming_1"),
+    ThePark("The Park", "foraging_1"),
+    Dungeon("Dungeon", "dungeon"),
+    DungeonHub("Dungeon Hub", "dungeon_hub"),
+    Hub("Hub", "hub"),
+    DarkAuction("Dark Auction", "dark_auction"),
+    JerryWorkshop("Jerry's Workshop", "winter");
 }

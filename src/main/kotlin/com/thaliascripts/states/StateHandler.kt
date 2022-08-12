@@ -6,39 +6,18 @@ import net.minecraft.util.ChatComponentText
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 import net.minecraftforge.client.event.GuiOpenEvent
-import net.minikloon.fsmgasm.StateSeries
+import net.minikloon.fsmgasm.State
+import net.minikloon.fsmgasm.StateGroup
 
 object StateHandler {
-    var state: StateSeries = StateSeries()
+    var state: State = EmptyState(1)
         private set
 
-    fun scheduleState() {
+    fun scheduleState(vararg state: State) {
         logger.info("scheduling state")
-
-        /*val listWalk: List<State> = listOf(
-            Vec3(62.0, 199.0, -109.0),
-            Vec3(79.0, 191.0, -53.0),
-            Vec3(96.0, 193.0, -24.0),
-            Vec3(119.0, 186.0, -6.0),
-            Vec3(114.0, 185.0, 20.0),
-            Vec3(114.0, 153.0, 41.0)
-        ).map { WalkToPointState(it) }
-
-        val listAOTV: List<State> = listOf(
-            Vec3(119.5, 160.5, 65.5),
-            Vec3(129.5, 109.0, 43.5),
-            Vec3(148.5, 107.0, 35.5)
-        ).map { AOTVState(it) }
-
-        state = StateSeries(listWalk + listAOTV)*/
-        /*state = StateSeries(
-            StateGroup(
-                KillGhosts(),
-                WalkTowardsGhost(),
-                KeyButtonState.SprintState(infiniteDurationState)
-            )
-        )*/
-        mc.thePlayer.addChatMessage(ChatComponentText("WHAT ARE YOU DOING RETARD"))
+        this.state = StateGroup(
+            state.asList()
+        )
     }
 
     @SubscribeEvent

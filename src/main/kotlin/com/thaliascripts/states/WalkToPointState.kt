@@ -1,6 +1,7 @@
 package com.thaliascripts.states
 
 import com.thaliascripts.mc
+import com.thaliascripts.states.rotations.DynamicRotationState
 import net.minecraft.util.Vec3
 import net.minikloon.fsmgasm.StateGroup
 import net.minikloon.fsmgasm.infiniteDurationState

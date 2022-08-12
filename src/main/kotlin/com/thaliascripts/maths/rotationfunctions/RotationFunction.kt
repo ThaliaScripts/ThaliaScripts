@@ -1,10 +1,10 @@
-package com.thaliascripts.states.rotationfunctions
+package com.thaliascripts.maths.rotationfunctions
 
 import kotlin.math.min
 import kotlin.math.pow
 import kotlin.random.Random
 
-abstract class Rotation {
+abstract class RotationFunction {
     abstract fun getFloat(x: Float): Float
 
     class RotationWindow(startArg: Int = 0, endArg: Int, maxSizeArg: Int) {

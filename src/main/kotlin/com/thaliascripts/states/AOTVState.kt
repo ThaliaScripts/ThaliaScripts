@@ -2,6 +2,7 @@ package com.thaliascripts.states
 
 import net.minecraft.util.Vec3
 import com.thaliascripts.states.KeyButtonState.KeyboardButtons
+import com.thaliascripts.states.rotations.DynamicRotationState
 import net.minikloon.fsmgasm.State
 import net.minikloon.fsmgasm.StateGroup
 import net.minikloon.fsmgasm.StateSeries

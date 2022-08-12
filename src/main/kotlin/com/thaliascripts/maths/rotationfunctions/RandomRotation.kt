@@ -1,13 +1,13 @@
-package com.thaliascripts.states.rotationfunctions
+package com.thaliascripts.maths.rotationfunctions
 
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.pow
 import kotlin.math.sin
 
-object RandomRotation : Rotation() {
-    private val rotationList: List<Rotation>
-    private var usingFunction: Rotation
+object RandomRotation : RotationFunction() {
+    private val rotationList: List<RotationFunction>
+    private var usingFunction: RotationFunction
 
     init {
         rotationList = listOf(
@@ -36,37 +36,37 @@ object RandomRotation : Rotation() {
         return usingFunction.getFloat(x)
     }
 
-    class EaseInSine : Rotation() {
+    class EaseInSine : RotationFunction() {
         override fun getFloat(x: Float): Float {
             return 1f - cos((x * PI.toFloat()) / 2f)
         }
     }
 
-    class EaseOutSine : Rotation() {
+    class EaseOutSine : RotationFunction() {
         override fun getFloat(x: Float): Float {
             return sin((x * PI.toFloat()) / 2f)
         }
     }
 
-    class EaseInOutSine : Rotation() {
+    class EaseInOutSine : RotationFunction() {
         override fun getFloat(x: Float): Float {
             return -(cos(PI.toFloat() * x) - 1f) / 2f
         }
     }
 
-    class EaseInQuad : Rotation() {
+    class EaseInQuad : RotationFunction() {
         override fun getFloat(x: Float): Float {
             return x * x
         }
     }
 
-    class EaseOutQuad : Rotation() {
+    class EaseOutQuad : RotationFunction() {
         override fun getFloat(x: Float): Float {
             return 1f - (1f - x) * (1f - x)
         }
     }
 
-    class EaseInOutQuad : Rotation() {
+    class EaseInOutQuad : RotationFunction() {
         override fun getFloat(x: Float): Float {
             return if (x < 0.5f) {
                 2f * x * x
@@ -77,19 +77,19 @@ object RandomRotation : Rotation() {
         }
     }
 
-    class EaseInCubic : Rotation() {
+    class EaseInCubic : RotationFunction() {
         override fun getFloat(x: Float): Float {
             return x * x * x
         }
     }
 
-    class EaseOutCubic : Rotation() {
+    class EaseOutCubic : RotationFunction() {
         override fun getFloat(x: Float): Float {
             return 1f - (1f - x).pow(3f)
         }
     }
 
-    class EaseInOutCubic : Rotation() {
+    class EaseInOutCubic : RotationFunction() {
         override fun getFloat(x: Float): Float {
             return if(x < 0.5f) {
                 4f * x * x * x
@@ -100,19 +100,19 @@ object RandomRotation : Rotation() {
         }
     }
 
-    class EaseInQuart : Rotation() {
+    class EaseInQuart : RotationFunction() {
         override fun getFloat(x: Float): Float {
             return x * x * x * x
         }
     }
 
-    class EaseOutQuart : Rotation() {
+    class EaseOutQuart : RotationFunction() {
         override fun getFloat(x: Float): Float {
             return 1f - (1f - x).pow(4f)
         }
     }
 
-    class EaseInOutQuart : Rotation() {
+    class EaseInOutQuart : RotationFunction() {
         override fun getFloat(x: Float): Float {
             return if (x < 0.5f) {
                 8f * x * x * x * x

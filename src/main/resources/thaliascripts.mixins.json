@@ -6,7 +6,8 @@
   "mixins": [
     "EntityRendererAccessor",
     "MinecraftAccessor",
-    "RenderManagerAccessor"
+    "RenderManagerAccessor",
+    "MixinEntityPlayerSP"
   ],
   "client": []
 }

@@ -50,8 +50,9 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
     compileOnly("org.spongepowered:mixin:0.8.5")
 
-    embed("org.jgrapht:jgrapht-core:1.3.1")
     embed("com.github.mi0epro:MCFSMgasm:-SNAPSHOT")
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
 }
 
 sourceSets {
@@ -61,6 +62,9 @@ sourceSets {
 }
 
 tasks {
+    test {
+        useJUnitPlatform()
+    }
     processResources {
         inputs.property("version", project.version)
         inputs.property("mcversion", "1.8.9")
@@ -93,7 +97,7 @@ tasks {
     }
     withType<KotlinCompile> {
         kotlinOptions {
-            freeCompilerArgs += listOf("-opt-in=kotlin.RequiresOptIn", "-Xjvm-default=all", "-Xrelease=8", "-Xbackend-threads=0")
+            freeCompilerArgs += listOf("-opt-in=kotlin.RequiresOptIn", "-Xjvm-default=all", "-Xbackend-threads=0")
         }
     }
 }
